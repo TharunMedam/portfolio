@@ -1,0 +1,80 @@
+#!/bin/bash
+set -euxo pipefail
+
+dnf update -y
+dnf install -y git nginx awscli amazon-cloudwatch-agent
+curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+dnf install -y nodejs
+
+mkdir -p /opt/cloud-webapp
+chown ec2-user:ec2-user /opt/cloud-webapp
+
+if [ ! -d /opt/cloud-webapp/app/.git ]; then
+  sudo -u ec2-user git clone --branch ${app_branch} ${app_repo_url} /opt/cloud-webapp/app
+else
+  cd /opt/cloud-webapp/app
+  sudo -u ec2-user git fetch --all
+  sudo -u ec2-user git checkout ${app_branch}
+  sudo -u ec2-user git pull origin ${app_branch}
+fi
+
+cd /opt/cloud-webapp/app
+npm install --omit=dev
+
+cat <<EOF >/etc/cloud-webapp.env
+PORT=${app_port}
+AWS_REGION=${aws_region}
+S3_BUCKET=${s3_bucket}
+STATIC_ASSET_BASE_URL=${static_asset_base_url}
+DB_HOST=${db_host}
+DB_PORT=${db_port}
+DB_NAME=${db_name}
+DB_USER=${db_user}
+DB_PASSWORD=${db_password}
+DB_SSL_MODE=disable
+EOF
+
+cat <<'EOF' >/etc/systemd/system/cloud-webapp.service
+[Unit]
+Description=Cloud Web App API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ec2-user
+WorkingDirectory=/opt/cloud-webapp/app
+EnvironmentFile=/etc/cloud-webapp.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat <<EOF >/etc/nginx/conf.d/cloud-webapp.conf
+server {
+  listen 80;
+  server_name _;
+
+  location / {
+    proxy_pass http://127.0.0.1:${app_port};
+    proxy_http_version 1.1;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+  }
+}
+EOF
+
+if [ -d /opt/cloud-webapp/app/static ]; then
+  aws s3 sync /opt/cloud-webapp/app/static s3://${s3_bucket}/ --delete
+fi
+
+aws s3 sync /opt/cloud-webapp/app s3://${s3_bucket}/ --exclude "*" --include "*.html"
+
+systemctl daemon-reload
+systemctl enable --now cloud-webapp.service
+systemctl enable --now nginx

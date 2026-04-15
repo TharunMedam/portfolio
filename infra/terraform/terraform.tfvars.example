@@ -1,0 +1,8 @@
+project_name             = "cloud-webapp"
+aws_region               = "us-east-1"
+app_repo_url             = "https://github.com/your-user/your-repo.git"
+app_branch               = "main"
+ssh_cidr                 = "203.0.113.10/32"
+db_password              = "replace-with-a-strong-password"
+alarm_email              = "you@example.com"
+static_bucket_public_read = true

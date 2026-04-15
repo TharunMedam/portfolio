@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharun Medam | Cloud-Focused Resume</title>
+  <style>
+    @page {
+      size: Letter;
+      margin: 0.34in;
+    }
+
+    :root {
+      --ink: #17232d;
+      --muted: #526270;
+      --accent: #0b6d8a;
+      --line: #dbe5ea;
+      --soft: #f4f8fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #edf3f6;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.28;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 18px auto;
+      padding: 0.42in 0.5in;
+      background: #fff;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .name {
+      margin: 0 0 4px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .title {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .contact {
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .section {
+      margin-top: 10px;
+    }
+
+    .section-title {
+      margin: 0 0 5px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .summary {
+      margin: 0;
+      font-size: 11.5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .item {
+      margin-bottom: 8px;
+    }
+
+    .item-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .role {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .date {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .meta {
+      margin: 1px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 4px 0 0 16px;
+      padding: 0;
+      font-size: 11.5px;
+    }
+
+    li + li {
+      margin-top: 2px;
+    }
+
+    .chip-block {
+      margin-bottom: 6px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .chip-label {
+      margin: 0 0 2px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .chip-text,
+    .plain-text {
+      font-size: 11.5px;
+    }
+
+    .list-tight div + div {
+      margin-top: 3px;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1 class="name">Tharun Medam</h1>
+      <p class="title">Cloud-Focused Software Engineer</p>
+      <div class="contact">
+        Cincinnati, OH | (513) 295-9220 | <a href="mailto:medamtn@mail.uc.edu">medamtn@mail.uc.edu</a> |
+        <a href="https://github.com/tharunmedam">GitHub</a> |
+        <a href="https://linkedin.com/in/tharunmedam">LinkedIn</a>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Professional Summary</h2>
+      <p class="summary">
+        Cloud-focused software engineer and Master of Engineering in Computer Science student at the University of Cincinnati with hands-on experience building full stack applications using Java, Python, Spring Boot, Django, JavaScript, and MySQL. AWS Certified Solutions Architect - Associate and AWS Certified Cloud Practitioner with strong foundations in cloud concepts, backend development, troubleshooting, and scalable application design. Seeking early-career roles in cloud support, backend development, and software engineering.
+      </p>
+    </section>
+
+    <div class="grid">
+      <div>
+        <section class="section">
+          <h2 class="section-title">Projects</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">E-Commerce Application</h3>
+              <div class="date">Python, Django, MySQL</div>
+            </div>
+            <ul>
+              <li>Built a full stack web application that helps users explore products, compare features, and review pricing details before purchase.</li>
+              <li>Developed cart and product retrieval functionality using Django, JavaScript, Bootstrap, and MySQL.</li>
+              <li>Strengthened practical experience in database-backed application flow, backend logic, and user-focused web development.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">E-Survey Application</h3>
+              <div class="date">Java, Spring Boot, MySQL</div>
+            </div>
+            <ul>
+              <li>Collaborated on a survey platform designed to collect forms, reviews, and ratings across structured feedback workflows.</li>
+              <li>Developed application components for data collection, form handling, and reliable backend-connected storage.</li>
+              <li>Built the system using Spring Boot, JavaScript, Bootstrap, and MySQL to support organized survey and reporting flows.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Leadership & Research</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">Lead, Virtual Visionaries Pvt Ltd</h3>
+              <div class="date">Jun 2021 - May 2024</div>
+            </div>
+            <ul>
+              <li>Led a student-driven IT venture focused on delivering custom web applications tailored to client needs.</li>
+              <li>Coordinated project delivery, client communication, and solution planning across multiple engagements.</li>
+              <li>Built strong ownership, collaboration, and technical communication skills through hands-on leadership.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">IEEE Publication on Social Media Security</h3>
+              <div class="date">Jun 2023</div>
+            </div>
+            <ul>
+              <li>Contributed to research analyzing security issues on social media platforms using data science techniques.</li>
+              <li>Explored patterns, trends, and vulnerabilities affecting user privacy and digital security.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="section">
+          <h2 class="section-title">Education</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">University of Cincinnati</h3>
+              <div class="date">Aug 2024 - Present</div>
+            </div>
+            <p class="meta">Master of Engineering in Computer Science | GPA: 3.8/4.0</p>
+          </div>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">KL University, India</h3>
+              <div class="date">Jul 2020 - Apr 2024</div>
+            </div>
+            <p class="meta">Bachelor of Technology in Computer Science | GPA: 3.7/4.0</p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Certifications</h2>
+          <div class="plain-text list-tight">
+            <div>AWS Certified Solutions Architect - Associate</div>
+            <div>AWS Certified Cloud Practitioner</div>
+            <div>Red Hat Certified Enterprise Application Developer EX183</div>
+            <div>Wipro TalentNext - Java Full Stack Developer</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Technical Skills</h2>
+
+          <div class="chip-block">
+            <p class="chip-label">Languages</p>
+            <div class="chip-text">Java, Python, C++, JavaScript, HTML5, CSS</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Frameworks</p>
+            <div class="chip-text">Spring Boot, Django, React, Bootstrap, Angular</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Databases</p>
+            <div class="chip-text">MySQL, MongoDB</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Cloud</p>
+            <div class="chip-text">AWS fundamentals, cloud architecture, static website hosting, deployment concepts</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Tools</p>
+            <div class="chip-text">VS Code, IntelliJ IDEA, PyCharm, Jupyter, XAMPP</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Relevant Coursework</h2>
+          <div class="plain-text">
+            Data Structures, Database Management Systems, Computer Networking, Networking Infrastructure and Security, Object-Oriented Programming, Computer Architecture, Operating Systems
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharun Medam | Cloud Support Engineer Portfolio</title>
+  <meta
+    name="description"
+    content="Cloud Support Engineer portfolio for Tharun Medam featuring AWS certifications, software engineering experience, academic achievements, and cloud-focused project direction."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #08131d;
+      --bg-2: #102538;
+      --surface: rgba(10, 24, 35, 0.92);
+      --surface-2: rgba(14, 34, 48, 0.96);
+      --text: #edf8ff;
+      --muted: #a9bdcb;
+      --line: rgba(104, 188, 255, 0.14);
+      --accent: #70f0c7;
+      --accent-2: #58b8ff;
+      --accent-3: #ffd670;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --max-width: 1160px;
+      --sans: "Space Grotesk", sans-serif;
+      --mono: "IBM Plex Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--sans);
+      line-height: 1.65;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 12%, rgba(112, 240, 199, 0.14), transparent 24%),
+        radial-gradient(circle at 88% 10%, rgba(88, 184, 255, 0.2), transparent 28%),
+        linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 48%, #16384c 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding: 4.75rem 0;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      color: var(--accent);
+      font: 500 0.8rem var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-subtitle {
+      max-width: 780px;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(8, 19, 29, 0.78);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .brand-role {
+      color: var(--muted);
+      font: 500 0.78rem var(--mono);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-grid,
+    .grid-2,
+    .signal-grid,
+    .projects-grid,
+    .cert-grid,
+    .prep-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1.28fr 0.84fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .grid-2,
+    .projects-grid,
+    .cert-grid,
+    .prep-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .signal-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-main,
+    .hero-side,
+    .signal-card,
+    .timeline-card,
+    .project-card,
+    .cert-card,
+    .prep-card {
+      padding: 1.6rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      font: 500 0.78rem var(--mono);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      margin: 1rem 0;
+      max-width: 11ch;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.9rem 1.15rem;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #08202a;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      color: var(--accent);
+      border-color: rgba(112, 240, 199, 0.32);
+    }
+
+    .snapshot-list,
+    .timeline,
+    .project-links,
+    .prep-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .snapshot-item,
+    .timeline-item,
+    .prep-item {
+      padding: 1rem 1.05rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .snapshot-label,
+    .mini-label {
+      display: block;
+      color: var(--accent-2);
+      font: 500 0.78rem var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-side-title {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .signal-card h3,
+    .project-card h3,
+    .cert-card h3,
+    .prep-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .muted,
+    .signal-card p,
+    .project-card p,
+    .timeline-item p,
+    .cert-card p,
+    .prep-card p,
+    .project-card li,
+    .prep-item {
+      color: var(--muted);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.7rem 1rem;
+    }
+
+    .timeline-item h3 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-meta {
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-date {
+      color: var(--muted);
+      font: 500 0.8rem var(--mono);
+      white-space: nowrap;
+    }
+
+    .project-role {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    .project-card ul {
+      padding-left: 1.1rem;
+      margin: 0.9rem 0 1rem;
+    }
+
+    .project-card li + li {
+      margin-top: 0.45rem;
+    }
+
+    .project-links a {
+      color: var(--accent-3);
+      font: 500 0.88rem var(--mono);
+    }
+
+    .project-links a:hover {
+      color: var(--accent);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.9rem;
+    }
+
+    .tag {
+      padding: 0.42rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(88, 184, 255, 0.11);
+      border: 1px solid rgba(88, 184, 255, 0.18);
+      color: #daf0ff;
+      font: 500 0.78rem var(--mono);
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-note {
+      margin-top: 0.45rem;
+      color: var(--accent-2);
+      font: 500 0.78rem var(--mono);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-2,
+      .signal-grid,
+      .projects-grid,
+      .cert-grid,
+      .prep-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0.9rem 0;
+      }
+
+      .hero {
+        padding-top: 4rem;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-date {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div>
+        <div class="brand-name">Tharun Medam</div>
+        <div class="brand-role">Cloud Support Engineer Portfolio</div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#signals">Strengths</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-main card">
+            <div class="hero-badge">AWS Certified • Support Mindset • Full Stack Foundation</div>
+            <h1>Ready for <span>cloud support</span> roles that need strong technical fundamentals.</h1>
+            <p class="lead">
+              I am a Master of Engineering in Computer Science student at the University of Cincinnati
+              with a background in full stack application development, AWS certifications, and a strong
+              interest in cloud infrastructure, troubleshooting, and scalable service delivery. I am
+              targeting early-career Cloud Support Engineer and cloud-focused software roles where I can
+              combine problem solving, customer-oriented thinking, and hands-on technical growth.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="mailto:medamtn@mail.uc.edu">Contact Me</a>
+              <a class="btn btn-secondary" href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a class="btn btn-secondary" href="https://linkedin.com/in/tharunmedam" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <div class="grid-2" style="margin-top: 1.5rem;">
+              <div class="snapshot-item">
+                <span class="snapshot-label">Best Fit</span>
+                Cloud Support Engineer, Cloud Operations, Associate Cloud Engineer, Software Engineer
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">Value I Offer</span>
+                Application knowledge, AWS fundamentals, technical communication, and an ownership mindset.
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-side card">
+            <h2 class="hero-side-title">Quick Snapshot</h2>
+            <div class="snapshot-list">
+              <div class="snapshot-item">
+                <span class="snapshot-label">Location</span>
+                Cincinnati, Ohio
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">Email</span>
+                <a href="mailto:medamtn@mail.uc.edu">medamtn@mail.uc.edu</a>
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">Phone</span>
+                513-295-9220
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">Master's GPA</span>
+                3.8 / 4.0
+              </div>
+              <div class="snapshot-item">
+                <span class="snapshot-label">AWS Certifications</span>
+                Cloud Practitioner and Solutions Architect - Associate
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <span class="eyebrow">About</span>
+        <h2 class="section-title">Why this profile works for cloud support hiring</h2>
+        <p class="section-subtitle">
+          Cloud Support Engineer roles often require more than certification knowledge. Teams look for people
+          who can understand application behavior, investigate issues carefully, communicate clearly, and grow
+          into real cloud troubleshooting responsibilities. My background aligns well with that path.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="signals">
+      <div class="container">
+        <span class="eyebrow">Strengths</span>
+        <h2 class="section-title">Signals that matter to a cloud support team</h2>
+        <p class="section-subtitle">
+          This portfolio emphasizes the traits that make an early-career candidate credible in support and cloud operations environments.
+        </p>
+
+        <div class="signal-grid">
+          <div class="signal-card card">
+            <h3>Application Understanding</h3>
+            <p>Hands-on experience with backend logic, databases, forms, data flows, and web application structure helps when diagnosing issues in cloud-hosted systems.</p>
+          </div>
+          <div class="signal-card card">
+            <h3>AWS Knowledge Base</h3>
+            <p>AWS certifications demonstrate practical familiarity with core cloud concepts, architecture patterns, resiliency, and secure service design.</p>
+          </div>
+          <div class="signal-card card">
+            <h3>Problem Solving</h3>
+            <p>My project and leadership work reflect ownership, structured thinking, and a willingness to work through issues instead of stopping at the first blocker.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <span class="eyebrow">Experience</span>
+        <h2 class="section-title">Education and leadership that strengthen support readiness</h2>
+        <p class="section-subtitle">
+          Strong support engineers learn quickly, stay calm with technical ambiguity, and can translate between systems and people. These experiences help show that foundation.
+        </p>
+
+        <div class="timeline-card card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div>
+                <h3>Master of Engineering in Computer Science</h3>
+                <div class="timeline-meta">University of Cincinnati</div>
+                <p>GPA: 3.8 / 4.0 with continued focus on software engineering and technical depth.</p>
+              </div>
+              <div class="timeline-date">Aug 2024 - Present</div>
+            </div>
+
+            <div class="timeline-item">
+              <div>
+                <h3>Bachelor of Technology in Computer Science</h3>
+                <div class="timeline-meta">KL University</div>
+                <p>GPA: 3.7 / 4.0 with foundational work in programming, systems, and application development.</p>
+              </div>
+              <div class="timeline-date">Jul 2020 - Apr 2024</div>
+            </div>
+
+            <div class="timeline-item">
+              <div>
+                <h3>Lead, IT Venture</h3>
+                <div class="timeline-meta">Virtual Visionaries Pvt Ltd</div>
+                <p>Led teams, coordinated solution delivery, and worked with clients, building communication and ownership skills that transfer well to support roles.</p>
+              </div>
+              <div class="timeline-date">Jun 2021 - May 2024</div>
+            </div>
+
+            <div class="timeline-item">
+              <div>
+                <h3>IEEE Research Publication</h3>
+                <div class="timeline-meta">Security and Data Science Research</div>
+                <p>Researched social media security issues, helping build analytical thinking around patterns, risk, and technical investigation.</p>
+              </div>
+              <div class="timeline-date">Jun 2023</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <span class="eyebrow">Projects</span>
+        <h2 class="section-title">Projects that support a troubleshooting-oriented profile</h2>
+        <p class="section-subtitle">
+          These are not yet cloud-native production systems, but they do show the kind of application understanding that helps in cloud support work: how software is built, where failures happen, and how data moves through a system.
+        </p>
+
+        <div class="projects-grid">
+          <article class="project-card card">
+            <h3>E-Commerce Application</h3>
+            <div class="project-role">Full Stack Web Developer</div>
+            <p>
+              Built a database-backed web application for exploring products, comparing options, and supporting
+              cart-related interactions across a user-facing shopping experience.
+            </p>
+            <ul>
+              <li>Used Python, Django, HTML, CSS, JavaScript, Bootstrap, and MySQL.</li>
+              <li>Worked on features involving product retrieval, application flow, and cart updates.</li>
+              <li>Built experience around debugging data-driven web behavior and backend-connected interfaces.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Django</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">MySQL</span>
+            </div>
+            <div class="project-links" style="margin-top: 1rem;">
+              <a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+            </div>
+          </article>
+
+          <article class="project-card card">
+            <h3>E-Survey Application</h3>
+            <div class="project-role">Full Stack Web Developer</div>
+            <p>
+              Collaborated on a structured survey platform designed to capture reviews, forms, and ratings
+              for multiple types of data collection workflows.
+            </p>
+            <ul>
+              <li>Built with Spring Boot, Java, HTML, CSS, JavaScript, Bootstrap, and MySQL.</li>
+              <li>Worked on form handling, application logic, and consistent data capture flows.</li>
+              <li>Strengthened understanding of how backend services and user-facing workflows interact in real applications.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">MySQL</span>
+            </div>
+            <div class="project-links" style="margin-top: 1rem;">
+              <a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certifications">
+      <div class="container">
+        <span class="eyebrow">Certifications</span>
+        <h2 class="section-title">Credentials that reinforce cloud readiness</h2>
+        <p class="section-subtitle">
+          These certifications help validate your cloud knowledge and support a transition from software projects into cloud-facing technical roles.
+        </p>
+
+        <div class="cert-grid">
+          <div class="cert-card card">
+            <h3>AWS Certified Cloud Practitioner</h3>
+            <p>Supports foundational understanding of cloud concepts, AWS core services, pricing, and support-related terminology.</p>
+          </div>
+          <div class="cert-card card">
+            <h3>AWS Certified Solutions Architect - Associate</h3>
+            <p>Shows knowledge of resilient architecture, secure service choices, and how AWS components work together in real systems.</p>
+          </div>
+          <div class="cert-card card">
+            <h3>Red Hat Certified Enterprise Application Developer EX183</h3>
+            <p>Adds credibility for Java application understanding, which is useful when supporting enterprise workloads.</p>
+          </div>
+          <div class="cert-card card">
+            <h3>Wipro TalentNext - Java Full Stack Developer</h3>
+            <p>Reinforces structured development training across backend and full stack application work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="container">
+        <span class="eyebrow">Roadmap</span>
+        <h2 class="section-title">Best next upgrades for a stronger cloud support application</h2>
+        <p class="section-subtitle">
+          These are the most valuable additions if you want this portfolio to move from good to genuinely competitive for cloud support hiring.
+        </p>
+
+        <div class="prep-grid">
+          <div class="prep-card card">
+            <h3>Add One Deployed AWS Project</h3>
+            <div class="prep-list">
+              <div class="prep-item">Deploy an existing application using S3, CloudFront, EC2, or RDS and explain the setup clearly.</div>
+              <div class="prep-item">Write a short incident-style section describing a problem you solved during setup or deployment.</div>
+              <div class="prep-item">Include screenshots, service choices, and what you learned from the deployment.</div>
+            </div>
+          </div>
+
+          <div class="prep-card card">
+            <h3>Add Support-Oriented Signals</h3>
+            <div class="prep-list">
+              <div class="prep-item">Show architecture diagrams or notes that explain systems in simple language.</div>
+              <div class="prep-item">Add links to GitHub repos and live demos for every project.</div>
+              <div class="prep-item">Document basic troubleshooting steps, logs checked, or fixes made during hosting work.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© 2026 Tharun Medam | Cloud Support Engineer Portfolio</div>
+      <div class="footer-note">Positioned for early-career cloud support, cloud operations, and software engineering opportunities</div>
+    </div>
+  </footer>
+</body>
+</html>

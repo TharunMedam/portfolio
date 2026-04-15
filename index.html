@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tharun Medam | Cloud Engineer Portfolio</title>
+  <meta name="description" content="Cloud-focused portfolio of Tharun Medam featuring AWS certifications, cloud architecture direction, deployment thinking, and application foundations for cloud engineering roles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1117;
+      --surface:#111922;
+      --surface-2:#161f2b;
+      --text:#eef3f8;
+      --muted:#9caab8;
+      --border:#253243;
+      --accent:#6ec1ff;
+      --accent-2:#8ef0cf;
+      --shadow:0 18px 48px rgba(0,0,0,.24);
+      --radius:20px;
+      --max:1120px;
+      --sans:"Public Sans",sans-serif;
+      --mono:"Source Code Pro",monospace;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      font-family:var(--sans);
+      color:var(--text);
+      line-height:1.65;
+      background:linear-gradient(180deg,#0a1015 0%,#0d141c 100%);
+    }
+    a{color:inherit;text-decoration:none}
+    .page{width:min(var(--max),calc(100% - 1.5rem));margin:0 auto;padding:1rem 0 3rem}
+    .nav{
+      position:sticky;top:1rem;z-index:20;
+      display:flex;justify-content:space-between;align-items:center;gap:1rem;
+      margin-bottom:1rem;padding:1rem 1.1rem;
+      border:1px solid var(--border);border-radius:999px;
+      background:rgba(11,17,23,.88);backdrop-filter:blur(12px);box-shadow:var(--shadow)
+    }
+    .brand h1{font-size:1rem;line-height:1.1}
+    .brand p,.eyebrow,.label{
+      font:500 .74rem var(--mono);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--accent);
+    }
+    .brand p{margin-top:.2rem;color:var(--muted)}
+    .nav-links{display:flex;flex-wrap:wrap;gap:.55rem}
+    .nav-links a{padding:.5rem .72rem;border-radius:999px;color:var(--muted);transition:.2s ease}
+    .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
+
+    .hero,.section{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--surface);
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:2rem;
+      margin-bottom:1rem;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1rem;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.5rem .85rem;
+      border-radius:999px;
+      background:rgba(110,193,255,.08);
+      border:1px solid rgba(110,193,255,.16);
+      color:var(--accent);
+      font:500 .74rem var(--mono);
+    }
+    .headline{
+      margin:1rem 0 .9rem;
+      max-width:10ch;
+      font-size:clamp(2.8rem,6vw,5.4rem);
+      line-height:.94;
+      letter-spacing:-.06em;
+    }
+    .headline span{color:var(--accent-2)}
+    .lead{max-width:700px;color:var(--muted);font-size:1.02rem}
+    .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.4rem}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;padding:.9rem 1.1rem;border-radius:14px;
+      font-weight:700;transition:.2s ease
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#08131a}
+    .btn-secondary{background:var(--surface-2);border:1px solid var(--border)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1.5rem}
+    .stat{
+      padding:1rem;border-radius:16px;background:var(--surface-2);border:1px solid var(--border)
+    }
+    .stat strong{display:block;font-size:1.35rem;margin-top:.24rem}
+    .hero-side{display:grid;gap:1rem}
+    .side-card{
+      padding:1.2rem;border-radius:16px;background:var(--surface-2);border:1px solid var(--border)
+    }
+    .side-card h2{font-size:1rem;margin-bottom:.7rem}
+    .mini-list,.arch-list,.todo-list{display:grid;gap:.7rem}
+    .mini-item,.arch-item,.todo-item{
+      padding:.88rem .92rem;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid var(--border)
+    }
+    .mini-item .label{display:block;margin-bottom:.25rem}
+
+    .section{padding:1.5rem;margin-bottom:1rem}
+    .section-head{margin-bottom:1.15rem}
+    .title{margin:.65rem 0;font-size:clamp(1.9rem,3vw,2.8rem);line-height:1.05;letter-spacing:-.05em}
+    .sub{max-width:780px;color:var(--muted)}
+    .two,.three,.projects,.certs,.arch-grid,.next-grid,.experience{
+      display:grid;gap:1rem
+    }
+    .two,.experience{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+    .projects,.certs,.arch-grid,.next-grid{grid-template-columns:repeat(2,1fr)}
+    .card{
+      padding:1.2rem;border-radius:16px;background:var(--surface-2);border:1px solid var(--border)
+    }
+    .card h3{font-size:1.06rem;margin-bottom:.55rem}
+    .card p,.timeline p{color:var(--muted)}
+    .timeline{display:grid;gap:.8rem}
+    .timeline-item{
+      padding:1rem;border-radius:16px;background:var(--surface-2);border:1px solid var(--border);
+      display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem
+    }
+    .timeline-item h3{font-size:1rem;margin-bottom:.18rem}
+    .meta{color:var(--accent);font-weight:700;margin-bottom:.2rem}
+    .date{color:var(--muted);font:500 .77rem var(--mono);white-space:nowrap}
+    .role{color:var(--accent);font-weight:700;margin-bottom:.6rem}
+    .project ul{padding-left:1.05rem;color:var(--muted);margin:.74rem 0 .9rem}
+    .project li+li{margin-top:.4rem}
+    .tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.82rem}
+    .tag{
+      padding:.42rem .7rem;border-radius:999px;background:rgba(110,193,255,.08);
+      border:1px solid rgba(110,193,255,.16);color:#cfeeff;font:500 .74rem var(--mono)
+    }
+    .links{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.9rem;color:var(--accent);font:500 .82rem var(--mono)}
+    footer{text-align:center;color:var(--muted);font-size:.92rem;padding:.3rem 0 0}
+    .footer-note{margin-top:.4rem;color:var(--accent);font:500 .76rem var(--mono)}
+
+    @media (max-width:980px){
+      .hero,.two,.three,.projects,.certs,.arch-grid,.next-grid,.experience{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+    }
+    @media (max-width:760px){
+      .nav{border-radius:24px;align-items:flex-start;flex-direction:column}
+    }
+    @media (max-width:640px){
+      .page{width:min(var(--max),calc(100% - 1rem))}
+      .headline{font-size:clamp(2.4rem,12vw,4rem)}
+      .timeline-item{grid-template-columns:1fr}
+      .date{white-space:normal}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="brand">
+        <h1>Tharun Medam</h1>
+        <p>Cloud Engineer Portfolio</p>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#strengths">Strengths</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#next">Next Step</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="pill">AWS Certified | Cloud Architecture Mindset | Deployment-Focused</div>
+        <h2 class="headline">A simple <span>cloud-first</span> portfolio built for real job applications.</h2>
+        <p class="lead">I am a Master of Engineering in Computer Science student at the University of Cincinnati with AWS certifications, cloud architecture knowledge, and application development experience that supports cloud deployment thinking. I am targeting cloud-focused roles where I can contribute to hosting, delivery, support, reliability, and scalable system design.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:medamtn@mail.uc.edu">Contact Me</a>
+          <a class="btn btn-secondary" href="./Tharun_Resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+          <a class="btn btn-secondary" href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn-secondary" href="https://linkedin.com/in/tharunmedam" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="label">Master's GPA</div><strong>3.8 / 4.0</strong></div>
+          <div class="stat"><div class="label">AWS Certifications</div><strong>2</strong></div>
+          <div class="stat"><div class="label">Target Path</div><strong style="font-size:1rem;line-height:1.4">Cloud Support + Operations</strong></div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="side-card">
+          <h2>Quick Snapshot</h2>
+          <div class="mini-list">
+            <div class="mini-item"><span class="label">Email</span><a href="mailto:medamtn@mail.uc.edu">medamtn@mail.uc.edu</a></div>
+            <div class="mini-item"><span class="label">Phone</span>513-295-9220</div>
+            <div class="mini-item"><span class="label">Target Roles</span>Cloud Support Engineer, Associate Cloud Engineer, Cloud Operations, Junior Solutions Architect</div>
+            <div class="mini-item"><span class="label">Location</span>Cincinnati, Ohio</div>
+          </div>
+        </div>
+        <div class="side-card">
+          <h2>AWS Service Direction</h2>
+          <div class="mini-list">
+            <div class="mini-item"><span class="label">S3 + CloudFront</span>Static delivery, hosting, and edge performance.</div>
+            <div class="mini-item"><span class="label">IAM + ACM</span>Access control, identity, and secure service usage.</div>
+            <div class="mini-item"><span class="label">EC2 / Beanstalk</span>Application hosting path for Django and Spring Boot.</div>
+            <div class="mini-item"><span class="label">RDS + Route 53</span>Managed data and domain-level routing direction.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-head">
+        <div class="eyebrow">About</div>
+        <h2 class="title">A cloud-focused profile grounded in architecture and deployment thinking</h2>
+        <p class="sub">My background combines AWS certification knowledge, software foundations, and a strong interest in how systems are hosted, secured, delivered, and scaled. I am especially interested in the operational side of cloud platforms: configuration, service interaction, reliability, and architecture choices.</p>
+      </div>
+      <div class="two">
+        <div class="card">
+          <h3>Cloud mindset</h3>
+          <p>I am building toward work that sits close to real AWS service usage: delivery, hosting, configuration, access, and cloud troubleshooting.</p>
+        </div>
+        <div class="card">
+          <h3>Why this version is plain</h3>
+          <p>This version intentionally removes the experimental layouts and keeps the focus on clarity, trust, and recruiter readability.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="strengths" class="section">
+      <div class="section-head">
+        <div class="eyebrow">Strengths</div>
+        <h2 class="title">What I bring to cloud teams</h2>
+        <p class="sub">This version emphasizes the capabilities that matter most for cloud hiring: AWS foundations, architecture thinking, system awareness, and calm ownership when something needs to be diagnosed or fixed.</p>
+      </div>
+      <div class="three">
+        <div class="card">
+          <h3>AWS Foundation</h3>
+          <p>AWS certifications support my understanding of architecture, hosting, delivery, identity, security concepts, and the decision-making behind resilient cloud systems.</p>
+        </div>
+        <div class="card">
+          <h3>Service and System Awareness</h3>
+          <p>My application background helps me understand how services, data flow, backend logic, and frontend behavior connect inside a cloud-hosted system.</p>
+        </div>
+        <div class="card">
+          <h3>Troubleshooting Mindset</h3>
+          <p>Leadership experience and self-driven project work reflect communication, initiative, and the ability to work through technical problems with persistence.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="section-head">
+        <div class="eyebrow">Experience</div>
+        <h2 class="title">Education, leadership, and technical foundation</h2>
+        <p class="sub">These experiences strengthen my fit for cloud support, cloud operations, and AWS-aligned engineering roles by showing technical consistency, strong academics, and real ownership.</p>
+      </div>
+      <div class="experience">
+        <div class="card">
+          <h3>Profile Note</h3>
+          <p>My academic performance, leadership work, and research background give me a strong base for entry-level cloud and AWS roles that need people who learn quickly and work methodically.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div>
+              <h3>Master of Engineering in Computer Science</h3>
+              <div class="meta">University of Cincinnati</div>
+              <p>GPA: 3.8 / 4.0 with continued focus on software engineering and technical growth.</p>
+            </div>
+            <div class="date">Aug 2024 - Present</div>
+          </div>
+          <div class="timeline-item">
+            <div>
+              <h3>Bachelor of Technology in Computer Science</h3>
+              <div class="meta">KL University</div>
+              <p>GPA: 3.7 / 4.0 with core experience across programming, systems, and application development.</p>
+            </div>
+            <div class="date">Jul 2020 - Apr 2024</div>
+          </div>
+          <div class="timeline-item">
+            <div>
+              <h3>Lead, Virtual Visionaries Pvt Ltd</h3>
+              <div class="meta">Student-Led IT Venture</div>
+              <p>Led teams, coordinated solution delivery, and worked closely with clients to build practical web solutions.</p>
+            </div>
+            <div class="date">Jun 2021 - May 2024</div>
+          </div>
+          <div class="timeline-item">
+            <div>
+              <h3>IEEE Research Publication</h3>
+              <div class="meta">Security and Data Science Research</div>
+              <p>Published research examining security issues on social media and data-driven approaches to threat analysis.</p>
+            </div>
+            <div class="date">Jun 2023</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-head">
+        <div class="eyebrow">Cloud-Ready Work</div>
+        <h2 class="title">Projects that support a cloud engineering profile</h2>
+        <p class="sub">These projects show the application foundations behind cloud work: backend logic, data handling, structured workflows, and the kind of systems that can be hosted, scaled, and supported in AWS environments.</p>
+      </div>
+      <div class="projects">
+        <article class="card project">
+          <h3>E-Commerce Application</h3>
+          <div class="role">Full Stack Web Developer</div>
+          <p>Built a web application that helps users explore products, compare features, and manage cart-based interactions through a database-backed shopping flow.</p>
+          <ul>
+            <li>Developed the application using Python, Django, JavaScript, Bootstrap, and MySQL.</li>
+            <li>Worked on product retrieval, dynamic user flow, and cart-related functionality.</li>
+            <li>Strengthened the kind of application understanding needed for future AWS deployment, support, and service troubleshooting.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Django</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span><span class="tag">MySQL</span>
+          </div>
+          <div class="links"><a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a></div>
+        </article>
+        <article class="card project">
+          <h3>E-Survey Application</h3>
+          <div class="role">Full Stack Web Developer</div>
+          <p>Collaborated on a survey platform designed to collect reviews, forms, and ratings through structured workflows and backend-driven data capture.</p>
+          <ul>
+            <li>Built with Spring Boot, Java, JavaScript, Bootstrap, and MySQL.</li>
+            <li>Worked on form handling, application logic, and reliable data collection flows.</li>
+            <li>Strengthened understanding of how backend services and user-facing workflows interact in systems that can later be cloud-hosted and scaled.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span><span class="tag">MySQL</span>
+          </div>
+          <div class="links"><a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <div class="section-head">
+        <div class="eyebrow">Certifications</div>
+        <h2 class="title">Credentials that reinforce AWS readiness</h2>
+        <p class="sub">These certifications strengthen my fit for early-career cloud and AWS roles by validating both cloud knowledge and the technical foundations behind modern application systems.</p>
+      </div>
+      <div class="certs">
+        <div class="card">
+          <h3>AWS Certified Cloud Practitioner</h3>
+          <p>Foundational understanding of AWS services, cloud concepts, pricing, and support-oriented terminology.</p>
+        </div>
+        <div class="card">
+          <h3>AWS Certified Solutions Architect - Associate</h3>
+          <p>Knowledge of resilient architecture, secure design, and how AWS services fit together in practical systems.</p>
+        </div>
+        <div class="card">
+          <h3>Red Hat Certified Enterprise Application Developer EX183</h3>
+          <p>Additional credibility in enterprise application behavior and backend systems that can be deployed in cloud environments.</p>
+        </div>
+        <div class="card">
+          <h3>Wipro TalentNext - Java Full Stack Developer</h3>
+          <p>Supports understanding of application structure, backend workflows, and service logic that complement cloud support and deployment roles.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="section-head">
+        <div class="eyebrow">Architecture</div>
+        <h2 class="title">How I think about AWS delivery</h2>
+        <p class="sub">This section frames the way I think about hosting, delivery, service interaction, and the next step toward production-style AWS systems.</p>
+      </div>
+      <div class="arch-grid">
+        <div class="card">
+          <h3>Current Hosting Direction</h3>
+          <div class="arch-list">
+            <div class="arch-item"><span class="label">Request</span>User reaches the site through a browser request.</div>
+            <div class="arch-item"><span class="label">Delivery</span>CloudFront serves cached content quickly through the edge.</div>
+            <div class="arch-item"><span class="label">Storage</span>S3 holds static assets such as the site and resume download.</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>A Fuller AWS Deployment Path</h3>
+          <div class="arch-list">
+            <div class="arch-item"><span class="label">Frontend</span>Static UI via S3 and CloudFront or a frontend hosting layer.</div>
+            <div class="arch-item"><span class="label">Backend</span>Application hosting on EC2 or Elastic Beanstalk for Django or Spring Boot.</div>
+            <div class="arch-item"><span class="label">Data and Access</span>RDS for managed data and IAM for secure service-level access control.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="next" class="section">
+      <div class="section-head">
+        <div class="eyebrow">Next Step</div>
+        <h2 class="title">What would make this portfolio fully cloud-first</h2>
+        <p class="sub">The strongest next move is one AWS-hosted project with architecture notes, repo links, and a short explanation of what problem you solved during deployment or configuration.</p>
+      </div>
+      <div class="next-grid">
+        <div class="card">
+          <h3>Best AWS Upgrade</h3>
+          <div class="todo-list">
+            <div class="todo-item">Deploy one application using AWS and explain the services you chose.</div>
+            <div class="todo-item">Add screenshots, architecture notes, and one troubleshooting story from setup.</div>
+            <div class="todo-item">Link the live deployment and the GitHub repository directly from the project section.</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Best Service Path</h3>
+          <div class="todo-list">
+            <div class="todo-item">S3 and CloudFront for static hosting and delivery.</div>
+            <div class="todo-item">EC2 or Elastic Beanstalk for application hosting.</div>
+            <div class="todo-item">RDS, IAM, Route 53, and ACM for managed data, access, DNS, and security.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>&copy; 2026 Tharun Medam | Cloud Engineer Portfolio</div>
+      <div class="footer-note">A plain, professional cloud portfolio built around AWS positioning and architectural thinking</div>
+    </footer>
+  </div>
+</body>
+</html>
