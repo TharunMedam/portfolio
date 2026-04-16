@@ -8,6 +8,14 @@ This repository now includes a small Node.js web API plus Terraform infrastructu
 - `CloudWatch` for CPU monitoring
 - `IAM` for instance access to S3, SSM, and CloudWatch
 
+Security defaults now include:
+
+- private S3 object access unless you explicitly enable public reads
+- no inbound SSH by default; use SSM Session Manager unless you opt in
+- RDS master password managed in AWS Secrets Manager instead of plaintext Terraform input
+- encrypted RDS storage and encrypted EC2 root volume
+- IMDSv2 required on the EC2 instance
+
 ## Architecture
 
 ```mermaid
@@ -56,7 +64,7 @@ The API listens on `http://localhost:3000`.
 Infrastructure lives in [infra/terraform](infra/terraform).
 
 1. Copy `infra/terraform/terraform.tfvars.example` to `infra/terraform/terraform.tfvars`.
-2. Set `app_repo_url` to your GitHub repository and provide a strong `db_password`.
+2. Set `app_repo_url` to your GitHub repository.
 3. Initialize and apply:
 
 ```powershell
@@ -87,5 +95,7 @@ The EC2 bootstrap script syncs repo-root `*.html` files to S3 automatically. You
 
 - The RDS security group only accepts PostgreSQL traffic from the EC2 security group.
 - The EC2 instance is assigned an IAM role instead of relying on long-lived AWS keys.
+- The RDS password is stored in Secrets Manager and fetched by the instance at boot.
+- SSH is disabled by default. Set `enable_ssh = true` only if you need it.
 - The CloudWatch alarm watches `AWS/EC2` `CPUUtilization` and publishes to SNS when it breaches the configured threshold.
 - Provisioning still requires your own AWS credentials and a reachable GitHub repository URL.

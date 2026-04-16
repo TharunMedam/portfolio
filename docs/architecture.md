@@ -27,11 +27,19 @@ flowchart LR
 ## Resource Responsibilities
 
 - `EC2`: runs the Node.js API and Nginx reverse proxy.
-- `Security Groups`: expose HTTP and SSH to EC2, while allowing PostgreSQL only from the EC2 security group to RDS.
+- `Security Groups`: expose HTTP to EC2, keep SSH off by default, and allow PostgreSQL only from the EC2 security group to RDS.
 - `IAM Role`: lets the instance read and write static assets in S3 and supports CloudWatch/SSM integrations.
 - `RDS`: stores guestbook-style application data used by `/api/entries`.
 - `S3`: stores static site files like `index.html` and other portfolio pages.
 - `CloudWatch Alarm`: alerts when CPU utilization stays above the configured threshold.
+
+## Security Controls
+
+- RDS credentials are managed by AWS Secrets Manager instead of being stored as plaintext Terraform input.
+- The RDS instance is private, encrypted, and protected with automated backups.
+- The EC2 instance requires IMDSv2 and uses an encrypted root volume.
+- The S3 bucket defaults to private access; public reads are opt-in.
+- Systems Manager access is available through the instance role, so SSH can remain closed by default.
 
 ## Deployment Flow
 

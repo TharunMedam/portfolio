@@ -3,6 +3,7 @@ node_modules/
 .terraform/
 *.tfstate
 *.tfstate.*
+infra/terraform/terraform.tfvars
 crash.log
 override.tf
 override.tf.json

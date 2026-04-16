@@ -92,6 +92,16 @@ data "aws_iam_policy_document" "static_bucket_public_read" {
   }
 }
 
+data "aws_iam_policy_document" "db_secret_access" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "secretsmanager:GetSecretValue"
+    ]
+    resources = [aws_db_instance.main.master_user_secret[0].secret_arn]
+  }
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -159,7 +169,7 @@ resource "aws_route_table_association" "public" {
 
 resource "aws_security_group" "ec2" {
   name        = "${local.name_prefix}-ec2-sg"
-  description = "Allow HTTP and SSH access to the web server"
+  description = "Allow HTTP access to the web server"
   vpc_id      = aws_vpc.main.id
 
   ingress {
@@ -170,12 +180,16 @@ resource "aws_security_group" "ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.ssh_cidr]
+  dynamic "ingress" {
+    for_each = var.enable_ssh ? [var.ssh_cidr] : []
+
+    content {
+      description = "SSH"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = [ingress.value]
+    }
   }
 
   egress {
@@ -271,6 +285,12 @@ resource "aws_iam_role_policy" "s3_access" {
   policy = data.aws_iam_policy_document.static_bucket_access.json
 }
 
+resource "aws_iam_role_policy" "db_secret_access" {
+  name   = "${local.name_prefix}-db-secret-access"
+  role   = aws_iam_role.ec2.id
+  policy = data.aws_iam_policy_document.db_secret_access.json
+}
+
 resource "aws_iam_role_policy_attachment" "ssm" {
   role       = aws_iam_role.ec2.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
@@ -303,13 +323,17 @@ resource "aws_db_instance" "main" {
   allocated_storage      = var.db_allocated_storage
   db_name                = var.db_name
   username               = var.db_username
-  password               = var.db_password
+  manage_master_user_password = true
   db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.rds.id]
   publicly_accessible    = false
   skip_final_snapshot    = true
-  deletion_protection    = false
+  deletion_protection    = var.db_deletion_protection
   multi_az               = false
+  backup_retention_period    = var.db_backup_retention_period
+  storage_encrypted          = true
+  copy_tags_to_snapshot      = true
+  auto_minor_version_upgrade = true
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-postgres"
@@ -346,12 +370,22 @@ resource "aws_instance" "web" {
     aws_region            = var.aws_region
     db_host               = aws_db_instance.main.address
     db_name               = var.db_name
-    db_password           = var.db_password
     db_port               = aws_db_instance.main.port
+    db_secret_arn         = aws_db_instance.main.master_user_secret[0].secret_arn
     db_user               = var.db_username
     s3_bucket             = aws_s3_bucket.static_assets.bucket
     static_asset_base_url = local.static_asset_base_url
   })
+
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"
+  }
+
+  root_block_device {
+    encrypted   = true
+    volume_type = "gp3"
+  }
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-web"

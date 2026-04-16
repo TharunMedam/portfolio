@@ -18,6 +18,11 @@ output "rds_endpoint" {
   value       = aws_db_instance.main.address
 }
 
+output "rds_master_secret_arn" {
+  description = "Secrets Manager ARN containing the managed RDS master password."
+  value       = aws_db_instance.main.master_user_secret[0].secret_arn
+}
+
 output "static_bucket_name" {
   description = "S3 bucket storing static files."
   value       = aws_s3_bucket.static_assets.bucket
