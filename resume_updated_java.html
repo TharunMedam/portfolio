@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharun Medam | Cloud-Focused Resume</title>
+  <style>
+    @page { size: Letter; margin: 0.34in; }
+    :root {
+      --ink: #16232e;
+      --muted: #556673;
+      --accent: #0f6c87;
+      --line: #dbe4e9;
+      --soft: #f4f8fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #edf3f6;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.26;
+    }
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 18px auto;
+      padding: 0.42in 0.5in;
+      background: #fff;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+    }
+    .header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+    .name {
+      margin: 0 0 4px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .title {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .contact {
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .contact a { color: inherit; text-decoration: none; }
+    .section { margin-top: 10px; }
+    .section-title {
+      margin: 0 0 5px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .summary { margin: 0; font-size: 11.5px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .item { margin-bottom: 8px; }
+    .item-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .role {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .date {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .meta {
+      margin: 1px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    ul {
+      margin: 4px 0 0 16px;
+      padding: 0;
+      font-size: 11.5px;
+    }
+    li + li { margin-top: 2px; }
+    .chip-block {
+      margin-bottom: 6px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+    .chip-label {
+      margin: 0 0 2px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .chip-text, .plain-text { font-size: 11.5px; }
+    .list-tight div + div { margin-top: 3px; }
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1 class="name">Tharun Medam</h1>
+      <p class="title">Cloud Support and Cloud-Focused Software Engineer</p>
+      <div class="contact">
+        Cincinnati, OH | (513) 295-9220 | <a href="mailto:medamtn@mail.uc.edu">medamtn@mail.uc.edu</a> |
+        <a href="https://github.com/tharunmedam">GitHub</a> |
+        <a href="https://linkedin.com/in/tharunmedam">LinkedIn</a>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Professional Summary</h2>
+      <p class="summary">
+        Cloud-focused software engineer and Master of Engineering in Computer Science student at the University of Cincinnati with AWS Certified Solutions Architect - Associate and AWS Certified Cloud Practitioner credentials. Experienced in building backend and full stack applications using Java, Spring Boot, Python, Django, JavaScript, and MySQL, with strong foundations in cloud architecture, deployment concepts, troubleshooting, and scalable application design. Seeking early-career roles in Cloud Support Engineering, Associate Cloud Engineering, Backend Engineering, and cloud-aligned software development.
+      </p>
+    </section>
+
+    <div class="grid">
+      <div>
+        <section class="section">
+          <h2 class="section-title">Cloud and Technical Projects</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">AWS Portfolio Hosting and Delivery</h3>
+              <div class="date">S3, CloudFront</div>
+            </div>
+            <ul>
+              <li>Built and prepared a static portfolio site for cloud-based hosting using Amazon S3 and CloudFront delivery concepts.</li>
+              <li>Applied knowledge of website hosting, public access configuration, static asset delivery, and cloud deployment flow.</li>
+              <li>Strengthened practical understanding of how DNS, storage, CDN delivery, and access settings affect production-style hosting.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">E-Commerce Application</h3>
+              <div class="date">Python, Django, MySQL</div>
+            </div>
+            <ul>
+              <li>Built a full stack web application that helps users explore products, compare features, and review pricing details before purchase.</li>
+              <li>Developed cart and product retrieval functionality using Django, JavaScript, Bootstrap, and MySQL.</li>
+              <li>Built practical experience relevant to cloud support and backend roles by working on database-backed application flow and server-side logic.</li>
+            </ul>
+          </div>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">E-Survey Application</h3>
+              <div class="date">Java, Spring Boot, MySQL</div>
+            </div>
+            <ul>
+              <li>Collaborated on a survey platform designed to collect forms, reviews, and ratings across structured feedback workflows.</li>
+              <li>Developed application components for data collection, form handling, and backend-connected storage using Spring Boot and MySQL.</li>
+              <li>Strengthened understanding of service logic, request handling, and reliable data workflows that support cloud-hosted applications.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Experience</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">Lead, Virtual Visionaries Pvt Ltd</h3>
+              <div class="date">Jun 2021 - May 2024</div>
+            </div>
+            <ul>
+              <li>Led a student-driven IT venture focused on delivering custom web applications tailored to client requirements.</li>
+              <li>Coordinated project delivery, client communication, and solution planning across multiple engagements.</li>
+              <li>Built ownership, collaboration, and technical communication skills valuable for cloud support and cross-functional engineering teams.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Research</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">IEEE Publication on Social Media Security</h3>
+              <div class="date">Jun 2023</div>
+            </div>
+            <ul>
+              <li>Contributed to research analyzing security issues on social media platforms using data science techniques.</li>
+              <li>Explored patterns, trends, and vulnerabilities affecting user privacy and digital security.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="section">
+          <h2 class="section-title">Education</h2>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">University of Cincinnati</h3>
+              <div class="date">Aug 2024 - Present</div>
+            </div>
+            <p class="meta">Master of Engineering in Computer Science | GPA: 3.8/4.0</p>
+          </div>
+
+          <div class="item">
+            <div class="item-head">
+              <h3 class="role">KL University, India</h3>
+              <div class="date">Jul 2020 - Apr 2024</div>
+            </div>
+            <p class="meta">Bachelor of Technology in Computer Science | GPA: 3.7/4.0</p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Cloud Certifications</h2>
+          <div class="plain-text list-tight">
+            <div>AWS Certified Solutions Architect - Associate</div>
+            <div>AWS Certified Cloud Practitioner</div>
+            <div>Red Hat Certified Enterprise Application Developer EX183</div>
+            <div>Wipro TalentNext - Java Full Stack Developer</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Cloud and Technical Skills</h2>
+
+          <div class="chip-block">
+            <p class="chip-label">Cloud</p>
+            <div class="chip-text">AWS fundamentals, cloud architecture, static website hosting, content delivery, deployment concepts, cloud troubleshooting</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">AWS Services</p>
+            <div class="chip-text">Amazon S3, CloudFront, IAM concepts, Route 53 concepts, AWS Certificate Manager concepts</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Java and Backend</p>
+            <div class="chip-text">Java, Spring Boot, JavaScript, Java Full Stack concepts, enterprise application development, backend service logic</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Programming and Databases</p>
+            <div class="chip-text">Python, C++, Django, MySQL, MongoDB, HTML5, CSS, Bootstrap, React, Angular, XAMPP</div>
+          </div>
+
+          <div class="chip-block">
+            <p class="chip-label">Tools</p>
+            <div class="chip-text">VS Code, IntelliJ IDEA, PyCharm, Jupyter</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Relevant Coursework</h2>
+          <div class="plain-text">
+            Data Structures, Database Management Systems, Computer Networking, Networking Infrastructure and Security, Object-Oriented Programming, Computer Architecture, Operating Systems
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
