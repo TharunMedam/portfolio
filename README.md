@@ -1,6 +1,38 @@
-# Cloud Web App on EC2 + RDS + S3 + CloudWatch
+# Resume Project Portfolio
 
-This repository now includes a small Node.js web API plus Terraform infrastructure to deploy it on AWS with:
+This repository contains runnable implementations and deployment material for the projects listed in Tharun Medam's resume:
+
+- [E-Commerce Web Application](projects/ecommerce) - product catalog, user session, cart, checkout, pricing, inventory, and admin order APIs.
+- [E-Survey Data Platform](projects/esurvey) - survey submission, validation, filtered retrieval, aggregation, and stakeholder reporting APIs.
+- Cloud Deployment Portfolio - Node.js API plus Terraform infrastructure to deploy on AWS with EC2, RDS, S3, IAM, CloudWatch, CloudFront-oriented static delivery, and SNS alerting.
+
+## Quick Start
+
+Run the resume project tests:
+
+```powershell
+cd projects/ecommerce
+npm test
+
+cd ../esurvey
+npm test
+```
+
+Run the project demos:
+
+```powershell
+cd projects/ecommerce
+npm start
+# http://localhost:4100
+
+cd ../esurvey
+npm start
+# http://localhost:4200
+```
+
+## Cloud Deployment Portfolio
+
+The cloud project includes a small Node.js web API plus Terraform infrastructure to deploy it on AWS with:
 
 - `EC2` for the application server
 - `RDS PostgreSQL` for application data
