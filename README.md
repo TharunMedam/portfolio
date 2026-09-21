@@ -1,34 +1,24 @@
-# Resume Project Portfolio
+# Tharun Medam Portfolio
 
-This repository contains runnable implementations and deployment material for the projects listed in Tharun Medam's resume:
+This repository contains Tharun Medam's portfolio site and AWS deployment project. The two application projects have independent repositories and deployments:
 
-- [E-Commerce Web Application](projects/ecommerce) - product catalog, user session, cart, checkout, pricing, inventory, and admin order APIs.
-- [E-Survey Data Platform](projects/esurvey) - survey submission, validation, filtered retrieval, aggregation, and stakeholder reporting APIs.
+- [E-Commerce Web Application](https://github.com/TharunMedam/Ecommerce) | [Live demo](https://ztm-ecommerce.vercel.app)
+- [E-Survey Data Platform](https://github.com/TharunMedam/Esurvey) | [Live demo](https://ztm-esurvey.vercel.app)
 - Cloud Deployment Portfolio - Node.js API plus Terraform infrastructure to deploy on AWS with EC2, RDS, S3, IAM, CloudWatch, CloudFront-oriented static delivery, and SNS alerting.
 
-## Quick Start
+Portfolio: https://ztm-portfolio.vercel.app
 
-Run the resume project tests:
+## Docker Portfolio
 
-```powershell
-cd projects/ecommerce
-npm test
-
-cd ../esurvey
-npm test
-```
-
-Run the project demos:
+Build and run the portfolio as an Nginx container:
 
 ```powershell
-cd projects/ecommerce
-npm start
-# http://localhost:4100
-
-cd ../esurvey
-npm start
-# http://localhost:4200
+docker compose up --build -d
 ```
+
+Open `http://localhost:8080`. The container exposes `/healthz` for deployment health checks.
+
+The Docker build uses an explicit allowlist so AWS credentials, Terraform state, local keys, and application dependencies are not copied into the image.
 
 ## Cloud Deployment Portfolio
 
@@ -131,3 +121,4 @@ The EC2 bootstrap script syncs repo-root `*.html` files to S3 automatically. You
 - SSH is disabled by default. Set `enable_ssh = true` only if you need it.
 - The CloudWatch alarm watches `AWS/EC2` `CPUUtilization` and publishes to SNS when it breaches the configured threshold.
 - Provisioning still requires your own AWS credentials and a reachable GitHub repository URL.
+
