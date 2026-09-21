@@ -7,9 +7,461 @@
   <meta name="description" content="Portfolio of Tharun Medam, an AWS-certified cloud-focused engineer with hands-on deployment work across EC2, RDS, S3, CloudWatch, and IAM.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;900&family=Outfit:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root{
+    :root {
+      --bg-color: #f4f0ea;
+      --ink: #0a0a0a;
+      --accent-yellow: #ffde59;
+      --accent-pink: #ff90e8;
+      --accent-green: #a6e3a1;
+      --accent-blue: #90cdff;
+      --accent-purple: #cba6f7;
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "Epilogue", sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+      --border-thick: 4px solid var(--ink);
+      --border-thin: 2px solid var(--ink);
+      --brutal-shadow: 8px 8px 0px var(--ink);
+      --brutal-shadow-hover: 3px 3px 0px var(--ink);
+      --max: 1280px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--ink);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      background-color: var(--bg-color);
+      background-image: radial-gradient(var(--ink) 1.5px, transparent 1.5px);
+      background-size: 35px 35px;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .page {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 5rem;
+    }
+
+    .brutal-card {
+      background: #fff;
+      border: var(--border-thick);
+      border-radius: 0;
+      box-shadow: var(--brutal-shadow);
+      padding: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .brutal-card:hover {
+      transform: translate(5px, 5px);
+      box-shadow: var(--brutal-shadow-hover);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--accent-yellow);
+      border: var(--border-thick);
+      box-shadow: var(--brutal-shadow);
+      position: sticky;
+      top: 1rem;
+      z-index: 100;
+    }
+
+    .name-block { display: flex; flex-direction: column; }
+
+    .name {
+      font: 900 1.5rem var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+    }
+
+    .role {
+      font: 600 0.85rem var(--font-mono);
+      text-transform: uppercase;
+      background: var(--ink);
+      color: #fff;
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      width: fit-content;
+      margin-top: 0.2rem;
+    }
+
+    .topnav {
+      display: flex;
+      gap: 1.5rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+    }
+
+    .topnav a {
+      position: relative;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .topnav a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+    .topnav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      margin-top: 4rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      background: var(--accent-pink);
+      border: var(--border-thin);
+      padding: 0.5rem 1rem;
+      font: 700 0.9rem var(--font-mono);
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0px var(--ink);
+      margin-bottom: 2rem;
+      transform: rotate(-2deg);
+    }
+
+    .hero h1 {
+      font: 900 clamp(3.5rem, 7vw, 6rem) var(--font-display);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+      text-shadow: 4px 4px 0px var(--accent-green);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      background: #fff;
+      padding: 1.5rem;
+      border: var(--border-thin);
+      box-shadow: 4px 4px 0px var(--ink);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font: 800 1.1rem var(--font-display);
+      text-transform: uppercase;
+      border: var(--border-thick);
+      box-shadow: 5px 5px 0px var(--ink);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0px var(--ink);
+    }
+
+    .btn-primary { background: var(--accent-blue); }
+    .btn-secondary { background: #fff; }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding-left: 2rem;
+    }
+
+    .side-note {
+      background: var(--accent-purple);
+      transform: rotate(1deg);
+    }
+
+    .side-note:nth-child(2) {
+      background: var(--accent-green);
+      transform: rotate(-1.5deg);
+    }
+
+    .side-note:nth-child(3) {
+      background: var(--accent-yellow);
+      transform: rotate(1deg);
+    }
+
+    .side-note strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      border-bottom: var(--border-thin);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section { padding: 6rem 0 2rem; }
+
+    .section-head {
+      margin-bottom: 3rem;
+      border-left: 8px solid var(--ink);
+      padding-left: 1.5rem;
+    }
+
+    .section-title {
+      font: 900 clamp(2.5rem, 5vw, 4rem) var(--font-display);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .section-copy {
+      font-size: 1.2rem;
+      font-weight: 500;
+      max-width: 800px;
+    }
+
+    .grid-stagger {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
+    }
+
+    .about-block-1 { grid-column: 1 / 8; background: var(--accent-pink); }
+    .about-block-2 { grid-column: 5 / 13; background: var(--accent-blue); margin-top: 3rem; }
+
+    .strength-block:nth-child(1) { grid-column: 1 / 5; transform: translateY(0); background: #fff; }
+    .strength-block:nth-child(2) { grid-column: 5 / 9; transform: translateY(3rem); background: var(--accent-yellow); }
+    .strength-block:nth-child(3) { grid-column: 9 / 13; transform: translateY(1.5rem); background: var(--accent-green); }
+
+    .brutal-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.5rem;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .skill-category {
+      width: 100%;
+      font: 800 1.5rem var(--font-display);
+      margin: 1.5rem 0 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .tag {
+      padding: 0.8rem 1.5rem;
+      background: #fff;
+      border: var(--border-thick);
+      box-shadow: 4px 4px 0px var(--ink);
+      font: 700 1rem var(--font-mono);
+      text-transform: uppercase;
+      border-radius: 50px;
+    }
+
+    .tag:hover {
+      background: var(--ink);
+      color: #fff;
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px var(--accent-pink);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      border-left: 6px solid var(--ink);
+      margin-left: 1rem;
+      padding-left: 2rem;
+    }
+
+    .timeline-item {
+      background: #fff;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -46px;
+      top: 20px;
+      width: 24px;
+      height: 24px;
+      background: var(--accent-yellow);
+      border: var(--border-thick);
+      border-radius: 50%;
+    }
+
+    .timeline-item:nth-child(even) { background: var(--accent-blue); }
+    .timeline-item:nth-child(odd) { background: var(--accent-pink); }
+    .timeline-item h3 {
+      border-bottom: none;
+      margin-bottom: 0.2rem;
+      font-size: 1.5rem;
+    }
+
+    .meta {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .date {
+      display: inline-block;
+      background: var(--ink);
+      color: #fff;
+      padding: 0.2rem 0.5rem;
+      font: 600 0.85rem var(--font-mono);
+      margin-top: 1rem;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .project { display: flex; flex-direction: column; }
+    .project:nth-child(1) { background: var(--accent-yellow); }
+    .project:nth-child(2) { background: var(--accent-green); }
+    .project:nth-child(3) { background: var(--accent-purple); }
+
+    .project-role {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      background: var(--ink);
+      color: #fff;
+      padding: 0.3rem 0.6rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .project ul {
+      padding-left: 1.2rem;
+      margin: 1rem 0;
+      font-weight: 500;
+    }
+
+    .project li { margin-bottom: 0.5rem; }
+    .project .tags {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 1.5rem;
+    }
+
+    .project .tag {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      border-width: 2px;
+      box-shadow: 2px 2px 0px var(--ink);
+    }
+
+    .links { margin-top: 1.5rem; }
+    .links a {
+      font: 800 1rem var(--font-display);
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .flow-item {
+      background: #fff;
+      border: var(--border-thin);
+      padding: 1rem;
+      box-shadow: 4px 4px 0px var(--ink);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-item span {
+      font: 800 1rem var(--font-display);
+      text-transform: uppercase;
+      background: var(--accent-yellow);
+      width: fit-content;
+      padding: 0.2rem 0.5rem;
+      border: 2px solid var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-block {
+      background: var(--accent-blue);
+      text-align: center;
+    }
+
+    .contact-block:last-child { background: var(--accent-pink); }
+    .contact-block strong {
+      display: block;
+      font: 900 2rem var(--font-display);
+      margin-top: 1rem;
+    }
+
+    footer {
+      margin-top: 6rem;
+      padding: 3rem 0;
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+      border-top: var(--border-thick);
+      font-family: var(--font-display);
+      text-transform: uppercase;
+    }
+
+    .footer-note {
+      color: var(--accent-yellow);
+      font-family: var(--font-mono);
+      margin-top: 0.5rem;
+    }
+
+    #certifications .certs {
       --bg:#ece4d8;
       --bg-deep:#dfd4c5;
       --paper:rgba(255,250,243,.88);
@@ -24,336 +476,17 @@
       --warm:#9d6e48;
       --warm-soft:rgba(157,110,72,.1);
       --shadow:0 20px 55px rgba(78,60,41,.12);
-      --max:1220px;
       --serif:"Cormorant Garamond",serif;
       --sans:"Outfit",sans-serif;
       --mono:"IBM Plex Mono",monospace;
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      min-height:100vh;
-      font-family:var(--sans);
-      color:var(--ink);
-      line-height:1.72;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,.8), transparent 24%),
-        radial-gradient(circle at 85% 10%, rgba(157,110,72,.12), transparent 22%),
-        linear-gradient(180deg, #f8f1e8 0%, var(--bg) 50%, var(--bg-deep) 100%);
-      position:relative;
-      overflow-x:hidden;
-    }
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.25;
-      background-image:
-        linear-gradient(rgba(38,29,22,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(38,29,22,.025) 1px, transparent 1px);
-      background-size:96px 96px;
-      mask-image:linear-gradient(180deg, black, transparent 86%);
-    }
-    a{color:inherit;text-decoration:none}
-
-    .page{
-      width:min(var(--max),calc(100% - 1.5rem));
-      margin:0 auto;
-      padding:1.45rem 0 4rem;
-      position:relative;
-      z-index:1;
-    }
-
-    .topbar{
-      display:grid;
-      grid-template-columns:auto 1fr;
-      gap:1rem;
-      align-items:center;
-      padding:1rem 1.2rem;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,251,246,.72);
-      backdrop-filter:blur(14px);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.7),
-        0 10px 28px rgba(82,63,43,.08);
-    }
-    .name{
-      font:700 1rem var(--sans);
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .role{
-      color:var(--muted);
-      font:500 .76rem var(--mono);
-      text-transform:uppercase;
-      letter-spacing:.18em;
-    }
-    .topnav{
-      display:flex;
-      justify-content:flex-end;
-      flex-wrap:wrap;
-      gap:.55rem;
-      color:var(--muted);
-      font-size:.81rem;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-    }
-    .topnav a{
-      padding:.45rem .7rem;
-      border:1px solid transparent;
-      border-radius:999px;
-      transition:.2s ease;
-    }
-    .topnav a:hover{
-      background:rgba(47,97,107,.06);
-      border-color:rgba(47,97,107,.14);
-      color:var(--ink);
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:1.18fr .82fr;
-      gap:2rem;
-      margin-top:1.3rem;
-      padding:3.25rem 2.1rem 2.8rem;
-      border:1px solid var(--line);
-      border-radius:34px;
-      background:
-        radial-gradient(circle at top right, rgba(157,110,72,.13), transparent 22%),
-        radial-gradient(circle at bottom left, rgba(47,97,107,.1), transparent 22%),
-        linear-gradient(180deg, rgba(255,250,243,.92), rgba(246,238,229,.88));
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.82),
-        0 24px 58px rgba(82,63,43,.12);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero::before{
-      content:"case study / cloud systems";
-      position:absolute;
-      right:2rem;
-      top:1.3rem;
-      color:rgba(30,26,23,.12);
-      font:500 .82rem var(--mono);
-      letter-spacing:.28em;
-      text-transform:uppercase;
-    }
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-80px;
-      bottom:-100px;
-      width:320px;
-      height:320px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(47,97,107,.12), transparent 64%);
-      pointer-events:none;
-    }
-    .hero-kicker,
-    .section-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      margin-bottom:1rem;
-      padding:.34rem .72rem;
-      border-radius:999px;
-      border:1px solid rgba(47,97,107,.16);
-      background:rgba(47,97,107,.06);
-      color:var(--accent);
-      font:500 .76rem var(--mono);
-      text-transform:uppercase;
-      letter-spacing:.1em;
-    }
-    .hero h1{
-      max-width:10ch;
-      margin-bottom:1rem;
-      font:700 clamp(3.6rem,7.4vw,6.2rem) var(--serif);
-      line-height:.9;
-      letter-spacing:-.03em;
-      color:var(--ink);
-    }
-    .hero p{
-      max-width:760px;
-      color:var(--muted);
-      font-size:1.05rem;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.8rem;
-      margin-top:1.6rem;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:.92rem 1.15rem;
-      border-radius:16px;
-      border:1px solid transparent;
-      font-weight:700;
-      transition:.2s ease;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{
-      background:linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color:#f8f4ef;
-      box-shadow:0 12px 24px rgba(47,97,107,.18);
-    }
-    .btn-secondary{
-      background:rgba(255,255,255,.56);
-      border-color:rgba(47,97,107,.12);
-      color:var(--ink);
-    }
-    .hero-side{
-      display:grid;
-      gap:1rem;
-      align-content:start;
-    }
-    .side-note{
-      padding:1.18rem 1.2rem;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:rgba(255,252,248,.72);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.8),
-        0 10px 26px rgba(82,63,43,.06);
-    }
-    .side-note strong{
-      display:block;
-      margin-bottom:.35rem;
-      font-size:.92rem;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-    }
-    .side-note p{
-      color:var(--muted);
-      font-size:.96rem;
-    }
-
-    .section{
-      padding:3rem 0 0;
-    }
-    .section-head{
-      display:grid;
-      grid-template-columns:280px 1fr;
-      gap:2rem;
-      margin-bottom:1.5rem;
-    }
-    .section-title{
-      font:600 clamp(2rem,4vw,3.35rem) var(--serif);
-      line-height:.98;
-      letter-spacing:-.02em;
-    }
-    .section-copy{
-      max-width:760px;
-      color:var(--muted);
-    }
-
-    .split,
-    .grid-2,
-    .grid-3,
-    .projects{
-      display:grid;
-      gap:1rem;
-    }
-    .split{grid-template-columns:280px 1fr}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .projects{grid-template-columns:repeat(3,1fr)}
-
-    .plain-block,
-    .project,
-    .cert,
-    .timeline-item,
-    .contact-block{
-      padding:1.25rem;
-      border:1px solid var(--line);
-      border-radius:24px;
-      background:var(--paper);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.78),
-        var(--shadow);
-    }
-    .plain-block h3,
-    .project h3,
-    .cert h3,
-    .contact-block h3{
-      font-size:1.08rem;
-      margin-bottom:.48rem;
-    }
-    .plain-block p,
-    .project p,
-    .cert p,
-    .contact-block p,
-    .timeline-item p{
-      color:var(--muted);
-    }
-
-    .timeline{
-      display:grid;
-      gap:1rem;
-    }
-    .timeline-item{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:.5rem 1rem;
-    }
-    .timeline-item h3{
-      font-size:1rem;
-      margin-bottom:.16rem;
-    }
-    .meta{
-      color:var(--accent);
-      font-weight:700;
-      margin-bottom:.2rem;
-    }
-    .date{
-      color:var(--muted);
-      font:500 .77rem var(--mono);
-      white-space:nowrap;
-    }
-
-    .project-role{
-      color:var(--accent);
-      font-weight:700;
-      margin-bottom:.55rem;
-    }
-    .project ul{
-      padding-left:1.05rem;
-      margin:.78rem 0 .92rem;
-      color:var(--muted);
-    }
-    .project li+li{margin-top:.42rem}
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.55rem;
-      margin-top:.8rem;
-    }
-    .tag{
-      padding:.42rem .7rem;
-      border-radius:999px;
-      border:1px solid rgba(47,97,107,.12);
-      background:var(--accent-soft);
-      color:var(--accent);
-      font:500 .74rem var(--mono);
-    }
-    .links{
-      margin-top:.9rem;
-      color:var(--accent);
-      font:500 .76rem var(--mono);
-    }
-
-    .certs{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:1rem;
+      font-family: var(--sans);
+      color: var(--ink);
     }
-    .cert{
+
+    .certs .cert {
       position:relative;
       overflow:hidden;
       min-height:280px;
@@ -362,12 +495,19 @@
       gap:1.1rem;
       align-items:stretch;
       transition:transform .25s ease, box-shadow .25s ease;
+      background: var(--paper);
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.78), var(--shadow);
     }
-    .cert:hover{
+
+    .certs .cert:hover {
       transform:translateY(-3px);
       box-shadow:0 28px 58px rgba(82,63,43,.14);
     }
-    .cert::before{
+
+    .certs .cert::before {
       content:"";
       position:absolute;
       inset:auto -32px -34px auto;
@@ -377,14 +517,16 @@
       background:radial-gradient(circle, rgba(157,110,72,.12), transparent 68%);
       pointer-events:none;
     }
-    .cert-visual,
-    .cert-copy{
+
+    .certs .cert-visual,
+    .certs .cert-copy {
       position:relative;
       z-index:1;
       border-radius:24px;
       padding:1rem;
     }
-    .cert-visual{
+
+    .certs .cert-visual {
       display:grid;
       align-content:center;
       border:1px solid rgba(50,40,31,.08);
@@ -398,8 +540,10 @@
       overflow:hidden;
       color:inherit;
     }
-    .cert-visual.is-static{cursor:default}
-    .cert-visual::before{
+
+    .certs .cert-visual.is-static { cursor:default; }
+
+    .certs .cert-visual::before {
       content:"";
       position:absolute;
       inset:-18% -20% auto auto;
@@ -409,7 +553,8 @@
       background:radial-gradient(circle, rgba(255,255,255,.68), rgba(255,255,255,0));
       pointer-events:none;
     }
-    .cert-stage{
+
+    .certs .cert-stage {
       display:grid;
       position:relative;
       width:100%;
@@ -419,7 +564,8 @@
       animation:credentialFlip 6.6s ease-in-out infinite;
       will-change:transform;
     }
-    .cert-front{
+
+    .certs .cert-front {
       position:absolute;
       inset:0;
       display:grid;
@@ -431,7 +577,8 @@
       backface-visibility:hidden;
       transform:rotateY(0deg);
     }
-    .cert-back{
+
+    .certs .cert-back {
       position:absolute;
       inset:0;
       display:grid;
@@ -443,60 +590,42 @@
       backface-visibility:hidden;
       transform:rotateY(180deg);
     }
-    .cert-back .cert-art,
-    .cert-back .cert-logo,
-    .cert-back .cert-badge{
+
+    .certs .cert-back .cert-art,
+    .certs .cert-back .cert-logo,
+    .certs .cert-back .cert-badge {
       transform:scaleX(-1);
     }
-    .cert:nth-child(2) .cert-stage{animation-delay:.4s}
-    .cert:nth-child(3) .cert-stage{animation-delay:.8s}
-    .cert:nth-child(4) .cert-stage{animation-delay:1.2s}
-    .cert-copy{
+
+    .certs .cert:nth-child(2) .cert-stage { animation-delay:.4s; }
+    .certs .cert:nth-child(3) .cert-stage { animation-delay:.8s; }
+    .certs .cert:nth-child(4) .cert-stage { animation-delay:1.2s; }
+
+    .certs .cert-copy {
       border:1px solid rgba(50,40,31,.08);
       background:rgba(255,251,245,.84);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
     }
-    .cert-logo{
+
+    .certs .cert-logo {
       min-height:92px;
       display:grid;
       place-items:center;
       padding:1rem;
       border-radius:22px;
       background:rgba(255,255,255,.56);
-      box-shadow:
-        inset 0 0 0 1px rgba(50,40,31,.06),
-        0 12px 24px rgba(82,63,43,.08);
+      box-shadow: inset 0 0 0 1px rgba(50,40,31,.06), 0 12px 24px rgba(82,63,43,.08);
       transform:translateZ(24px);
     }
-    .cert-logo img{
+
+    .certs .cert-logo img {
       max-width:100%;
       max-height:42px;
       object-fit:contain;
       filter:saturate(1.04) contrast(1.02);
     }
-    .cert-logo.wipro{
-      min-height:122px;
-      gap:.55rem;
-      align-content:center;
-      justify-items:center;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,.82), rgba(255,255,255,.42) 32%, transparent 33%),
-        linear-gradient(180deg, rgba(245,238,255,.96), rgba(232,223,251,.94));
-      box-shadow:
-        inset 0 0 0 1px rgba(94,57,150,.08),
-        0 14px 26px rgba(94,57,150,.12);
-    }
-    .cert-logo.wipro img{
-      max-height:56px;
-      filter:saturate(1.12) contrast(1.05);
-    }
-    .cert-logo.wipro span{
-      color:#5e3996;
-      font:600 .72rem var(--mono);
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-    .cert-art{
+
+    .certs .cert-art {
       min-height:230px;
       display:grid;
       place-items:center;
@@ -514,25 +643,26 @@
         0 6px 12px rgba(82,63,43,.08);
       transform:translateZ(38px);
     }
-    .cert-art::before{
+
+    .certs .cert-art::before {
       content:"";
       position:absolute;
       inset:10px;
       border-radius:22px;
       background:linear-gradient(145deg, rgba(255,255,255,.96), rgba(239,228,211,.78));
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.88),
-        inset 0 -10px 18px rgba(20,28,38,.05);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.88), inset 0 -10px 18px rgba(20,28,38,.05);
       z-index:0;
     }
-    .cert-art::after{
+
+    .certs .cert-art::after {
       content:"";
       position:absolute;
       inset:0;
       background:linear-gradient(125deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,.18) 100%);
       pointer-events:none;
     }
-    .cert-art img{
+
+    .certs .cert-art img {
       position:relative;
       z-index:1;
       max-width:100%;
@@ -543,22 +673,24 @@
       filter:drop-shadow(0 16px 20px rgba(20,28,38,.16));
       backface-visibility:hidden;
     }
-    .cert-art.redhat{
+
+    .certs .cert-art.redhat {
       background:
         radial-gradient(circle at 30% 22%, rgba(255,255,255,.18), rgba(255,255,255,0) 26%),
         linear-gradient(180deg, #1a1a1a, #090909);
     }
-    .cert-art.redhat::before{
+
+    .certs .cert-art.redhat::before {
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.08),
-        inset 0 -10px 18px rgba(0,0,0,.3);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), inset 0 -10px 18px rgba(0,0,0,.3);
     }
-    .cert-art.redhat img{
+
+    .certs .cert-art.redhat img {
       max-height:176px;
       filter:drop-shadow(0 18px 24px rgba(0,0,0,.28));
     }
-    .cert-art.wipro-art{
+
+    .certs .cert-art.wipro-art {
       background:
         radial-gradient(circle at 30% 20%, rgba(255,255,255,.9), rgba(255,255,255,.36) 28%, transparent 29%),
         linear-gradient(180deg, rgba(245,238,255,.98), rgba(232,223,251,.95));
@@ -567,14 +699,17 @@
       justify-items:center;
       text-align:center;
     }
-    .cert-art.wipro-art::before{
+
+    .certs .cert-art.wipro-art::before {
       background:linear-gradient(145deg, rgba(255,255,255,.98), rgba(233,222,252,.82));
     }
-    .cert-art.wipro-art img{
+
+    .certs .cert-art.wipro-art img {
       max-height:62px;
       filter:saturate(1.1) contrast(1.04);
     }
-    .cert-art.wipro-art strong{
+
+    .certs .cert-art.wipro-art strong {
       position:relative;
       z-index:1;
       display:block;
@@ -583,7 +718,8 @@
       letter-spacing:.08em;
       text-transform:uppercase;
     }
-    .cert-art.wipro-art span{
+
+    .certs .cert-art.wipro-art span {
       position:relative;
       z-index:1;
       display:block;
@@ -592,59 +728,11 @@
       letter-spacing:.14em;
       text-transform:uppercase;
     }
-    .cert-badge{
-      width:96px;
-      aspect-ratio:1;
-      margin:0 auto;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      position:relative;
-      background:radial-gradient(circle at 30% 30%, #ffffff 0%, #f3ede4 45%, #ddd1c1 100%);
-      border:7px solid #ede4d7;
-      box-shadow:
-        inset 0 0 0 2px rgba(20,28,38,.07),
-        0 8px 22px rgba(20,28,38,.1);
-      animation:badgeFloat 5.6s ease-in-out infinite;
-      transform:translateZ(42px);
-    }
-    .cert-badge::before{
-      content:"";
-      position:absolute;
-      inset:9px;
-      border-radius:50%;
-      border:1px dashed rgba(20,28,38,.18);
-    }
-    .cert-badge::after{
-      content:"";
-      position:absolute;
-      bottom:-15px;
-      left:50%;
-      width:32px;
-      height:30px;
-      transform:translateX(-50%);
-      clip-path:polygon(0 0,100% 0,74% 100%,50% 74%,26% 100%);
-      background:linear-gradient(180deg, var(--accent), #23474e);
-    }
-    .cert-badge span{
-      position:relative;
-      z-index:1;
-      text-align:center;
-      color:var(--ink);
-      font:700 .86rem var(--mono);
-      line-height:1.05;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .cert-badge.wipro{
-      background:radial-gradient(circle at 30% 30%, #f7f4ff 0%, #e9e0fa 42%, #c1aef4 100%);
-      border-color:#ddd2fb;
-    }
-    .cert:hover .cert-stage{animation-duration:4.8s}
-    .cert:hover .cert-art{
-      transform:translateZ(38px) scale(1.02);
-    }
-    .cert-copy small{
+
+    .certs .cert:hover .cert-stage { animation-duration:4.8s; }
+    .certs .cert:hover .cert-art { transform:translateZ(38px) scale(1.02); }
+
+    .certs .cert-copy small {
       display:inline-block;
       margin-bottom:.4rem;
       color:var(--warm);
@@ -652,8 +740,23 @@
       text-transform:uppercase;
       letter-spacing:.08em;
     }
-    .cert-copy h3{margin-bottom:.6rem}
-    .cert-link{
+
+    .certs .cert-copy h3 {
+      margin-bottom:.6rem;
+      font-size:1.08rem;
+      color:var(--ink);
+      font-family: var(--sans);
+      letter-spacing: normal;
+      border: none;
+      padding: 0;
+    }
+
+    .certs .cert-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .certs .cert-link {
       display:inline-flex;
       align-items:center;
       gap:.45rem;
@@ -664,12 +767,14 @@
       letter-spacing:.06em;
       text-decoration:none;
     }
-    .cert-link::after{
+
+    .certs .cert-link::after {
       content:"\2197";
       font-size:.9rem;
       line-height:1;
     }
-    .cert-copy .cert-tag{
+
+    .certs .cert-copy .cert-tag {
       display:inline-flex;
       align-items:center;
       gap:.35rem;
@@ -683,7 +788,8 @@
       letter-spacing:.04em;
       text-transform:uppercase;
     }
-    .cert-copy .cert-tag::before{
+
+    .certs .cert-copy .cert-tag::before {
       content:"";
       width:8px;
       height:8px;
@@ -691,13 +797,15 @@
       background:var(--accent);
       box-shadow:0 0 0 4px rgba(47,97,107,.12);
     }
-    .cert-meta{
+
+    .certs .cert-meta {
       display:flex;
       flex-wrap:wrap;
       gap:.5rem;
       margin-top:1rem;
     }
-    .cert-meta span{
+
+    .certs .cert-meta span {
       display:inline-flex;
       align-items:center;
       padding:.35rem .58rem;
@@ -710,117 +818,55 @@
       letter-spacing:.05em;
     }
 
-    .architecture{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1rem;
-    }
-    .flow-list{
-      display:grid;
-      gap:.7rem;
-      margin-top:1rem;
-    }
-    .flow-item{
-      padding:.9rem .95rem;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:var(--paper-soft);
-      color:var(--muted);
-    }
-    .flow-item span{
-      display:block;
-      margin-bottom:.24rem;
-      color:var(--accent);
-      font:500 .73rem var(--mono);
-      text-transform:uppercase;
-      letter-spacing:.08em;
+    @keyframes badgeFloat {
+      0%,100% { transform:translateZ(42px) translateY(0); }
+      50% { transform:translateZ(42px) translateY(-5px); }
     }
 
-    .contact{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:1rem;
-    }
-    .contact-block strong{
-      display:block;
-      margin-top:.3rem;
-      font:600 2rem var(--serif);
-      line-height:1.05;
-      letter-spacing:.02em;
+    @keyframes credentialFlip {
+      0% { transform:rotateY(0deg); }
+      18% { transform:rotateY(0deg); }
+      50% { transform:rotateY(180deg); }
+      68% { transform:rotateY(180deg); }
+      100% { transform:rotateY(360deg); }
     }
 
-    footer{
-      padding-top:2.2rem;
-      text-align:center;
-      color:var(--muted);
-      font-size:.92rem;
-    }
-    .footer-note{
-      margin-top:.4rem;
-      color:var(--accent);
-      font:500 .76rem var(--mono);
+    @media (prefers-reduced-motion:reduce) {
+      .certs .cert-stage { animation:none; }
+      .certs .cert:hover .cert-art { transform:translateZ(38px); }
     }
 
-    @keyframes badgeFloat{
-      0%,100%{transform:translateZ(42px) translateY(0)}
-      50%{transform:translateZ(42px) translateY(-5px)}
-    }
-    @keyframes credentialFlip{
-      0%{transform:rotateY(0deg)}
-      18%{transform:rotateY(0deg)}
-      50%{transform:rotateY(180deg)}
-      68%{transform:rotateY(180deg)}
-      100%{transform:rotateY(360deg)}
+    @media (max-width: 1024px) {
+      .grid-stagger { display: flex; flex-direction: column; }
+      .strength-block:nth-child(n) { transform: translateY(0); }
+      .projects { grid-template-columns: repeat(2, 1fr); }
+      .hero { grid-template-columns: 1fr; }
+      .hero-side { padding-left: 0; flex-direction: row; flex-wrap: wrap; }
     }
 
-    @media (prefers-reduced-motion:reduce){
-      .cert-badge,
-      .cert-stage{animation:none}
-      .cert:hover .cert-art{transform:translateZ(38px)}
-    }
-
-    @media (max-width:980px){
-      .hero,
-      .section-head,
-      .split,
-      .grid-2,
-      .grid-3,
-      .projects,
-      .certs,
-      .architecture,
-      .contact{grid-template-columns:1fr}
-    }
-    @media (max-width:760px){
-      .topbar{grid-template-columns:1fr}
-      .topnav{justify-content:flex-start}
-      .hero{padding:2.5rem 1.35rem 2.2rem}
-      .hero::before{display:none}
-    }
-    @media (max-width:640px){
-      .page{width:min(var(--max),calc(100% - 1rem))}
-      .hero h1{font-size:clamp(3rem,14vw,4.9rem)}
-      .cert{grid-template-columns:1fr}
-      .timeline-item{grid-template-columns:1fr}
-      .date{white-space:normal}
+    @media (max-width: 760px) {
+      .topbar { flex-direction: column; gap: 1rem; }
+      .projects { grid-template-columns: 1fr; }
+      .certs { grid-template-columns: 1fr !important; }
+      .architecture { grid-template-columns: 1fr; }
+      .contact { grid-template-columns: 1fr; }
+      .hero h1 { font-size: clamp(3rem, 10vw, 4.5rem); }
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header class="topbar">
-      <div>
+      <div class="name-block">
         <div class="name">Tharun Medam</div>
         <div class="role">Cloud Engineer</div>
       </div>
       <nav class="topnav">
         <a href="#about">About</a>
-        <a href="#strengths">Strengths</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#contact">Contact</a>
+        <a href="#certifications">Certs</a>
       </nav>
     </header>
 
@@ -836,15 +882,15 @@
         </div>
       </div>
       <div class="hero-side">
-        <div class="side-note">
+        <div class="brutal-card side-note">
           <strong>Current Focus</strong>
           <p>Cloud Support Engineer, Associate Cloud Engineer, Cloud Operations, and junior AWS-aligned roles.</p>
         </div>
-        <div class="side-note">
+        <div class="brutal-card side-note">
           <strong>AWS Stack Used</strong>
           <p>EC2, RDS, S3, CloudWatch, IAM, plus GitHub documentation and an architecture diagram.</p>
         </div>
-        <div class="side-note">
+        <div class="brutal-card side-note">
           <strong>Location</strong>
           <p>Cincinnati, Ohio</p>
         </div>
@@ -853,18 +899,15 @@
 
     <section id="about" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">About</div>
-          <h2 class="section-title">Built for cloud-first work</h2>
-        </div>
+        <h2 class="section-title">Built for cloud-first work</h2>
         <p class="section-copy">My background combines AWS certification knowledge, application development, and a growing focus on cloud infrastructure. I am especially interested in how systems are hosted, secured, monitored, and documented so they can be supported with confidence.</p>
       </div>
-      <div class="grid-2">
-        <div class="plain-block">
+      <div class="grid-stagger">
+        <div class="brutal-card about-block-1">
           <h3>What I care about</h3>
           <p>Clear system behavior, strong operational visibility, and infrastructure choices that make deployment and support more dependable.</p>
         </div>
-        <div class="plain-block">
+        <div class="brutal-card about-block-2">
           <h3>How I work</h3>
           <p>I like documenting what I build, understanding the full deployment path, and making technical decisions that are practical rather than theoretical.</p>
         </div>
@@ -873,22 +916,19 @@
 
     <section id="strengths" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Strengths</div>
-          <h2 class="section-title">What I bring</h2>
-        </div>
+        <h2 class="section-title">What I bring</h2>
         <p class="section-copy">For cloud-facing roles, my strongest value is the combination of AWS fundamentals, application awareness, and a steady troubleshooting mindset.</p>
       </div>
-      <div class="grid-3">
-        <div class="plain-block">
+      <div class="grid-stagger">
+        <div class="brutal-card strength-block">
           <h3>AWS Foundation</h3>
           <p>AWS certifications support my understanding of architecture, hosting, delivery, identity, security concepts, and service selection.</p>
         </div>
-        <div class="plain-block">
+        <div class="brutal-card strength-block">
           <h3>System Awareness</h3>
           <p>My application background helps me understand how frontend behavior, backend services, databases, and infrastructure interact.</p>
         </div>
-        <div class="plain-block">
+        <div class="brutal-card strength-block">
           <h3>Calm Troubleshooting</h3>
           <p>I am comfortable breaking problems into steps, checking configuration carefully, and documenting what happened along the way.</p>
         </div>
@@ -897,95 +937,71 @@
 
     <section id="skills" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Skills</div>
-          <h2 class="section-title">Technical stack</h2>
-        </div>
-        <p class="section-copy">These are the core technologies and cloud concepts I’m most comfortable discussing, building with, and applying to cloud-focused engineering work.</p>
+        <h2 class="section-title">Technical stack</h2>
+        <p class="section-copy">These are the core technologies and cloud concepts I'm most comfortable discussing, building with, and applying to cloud-focused engineering work.</p>
       </div>
-      <div class="grid-3">
-        <div class="plain-block">
-          <h3>Cloud and AWS</h3>
-          <div class="tags">
-            <span class="tag">AWS</span>
-            <span class="tag">S3</span>
-            <span class="tag">EC2</span>
-            <span class="tag">RDS</span>
-            <span class="tag">CloudFront</span>
-            <span class="tag">CloudWatch</span>
-            <span class="tag">IAM</span>
-          </div>
-        </div>
-        <div class="plain-block">
-          <h3>Languages and Backend</h3>
-          <div class="tags">
-            <span class="tag">Java</span>
-            <span class="tag">Python</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Spring Boot</span>
-            <span class="tag">Django</span>
-            <span class="tag">Node.js</span>
-          </div>
-        </div>
-        <div class="plain-block">
-          <h3>Data, Web, and Tools</h3>
-          <div class="tags">
-            <span class="tag">MySQL</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Bootstrap</span>
-            <span class="tag">Git</span>
-            <span class="tag">Terraform</span>
-          </div>
-        </div>
+      <div class="skills-container">
+        <div class="skill-category">Cloud and AWS</div>
+        <span class="tag">AWS</span>
+        <span class="tag">S3</span>
+        <span class="tag">EC2</span>
+        <span class="tag">RDS</span>
+        <span class="tag">CloudFront</span>
+        <span class="tag">CloudWatch</span>
+        <span class="tag">IAM</span>
+
+        <div class="skill-category">Languages and Backend</div>
+        <span class="tag">Java</span>
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Django</span>
+        <span class="tag">Node.js</span>
+
+        <div class="skill-category">Data, Web, and Tools</div>
+        <span class="tag">MySQL</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Bootstrap</span>
+        <span class="tag">Git</span>
+        <span class="tag">Terraform</span>
       </div>
     </section>
 
     <section id="experience" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Experience</div>
-          <h2 class="section-title">Education and leadership</h2>
-        </div>
+        <h2 class="section-title">Education and leadership</h2>
         <p class="section-copy">My academic work, leadership experience, and research background give me a solid base for early-career cloud and AWS roles.</p>
       </div>
-      <div class="split">
-        <div class="plain-block">
+      <div style="display:grid;grid-template-columns:1fr;gap:2rem;">
+        <div class="brutal-card" style="background: var(--accent-yellow);">
           <h3>Profile Note</h3>
           <p>My background combines strong academic performance, applied project experience, and leadership exposure through client-focused solution delivery, providing a solid foundation for early-career cloud and engineering roles.</p>
         </div>
         <div class="timeline">
-          <div class="timeline-item">
-            <div>
-              <h3>Master of Engineering in Computer Science</h3>
-              <div class="meta">University of Cincinnati</div>
-              <p>GPA: 3.8 / 4.0</p>
-            </div>
+          <div class="brutal-card timeline-item">
+            <h3>Master of Engineering in Computer Science</h3>
+            <div class="meta">University of Cincinnati</div>
+            <p>GPA: 3.8 / 4.0</p>
             <div class="date">Aug 2024 - Present</div>
           </div>
-          <div class="timeline-item">
-            <div>
-              <h3>Bachelor of Technology in Computer Science</h3>
-              <div class="meta">KL University</div>
-              <p>GPA: 3.7 / 4.0</p>
-            </div>
+          <div class="brutal-card timeline-item">
+            <h3>Bachelor of Technology in Computer Science</h3>
+            <div class="meta">KL University</div>
+            <p>GPA: 3.7 / 4.0</p>
             <div class="date">Jul 2020 - Apr 2024</div>
           </div>
-          <div class="timeline-item">
-            <div>
-              <h3>Lead, Virtual Visionaries Pvt Ltd</h3>
-              <div class="meta">Student-Led IT Venture</div>
-              <p>Led teams, coordinated delivery, and worked with clients on practical web solutions.</p>
-            </div>
+          <div class="brutal-card timeline-item">
+            <h3>Lead, Virtual Visionaries Pvt Ltd</h3>
+            <div class="meta">Student-Led IT Venture</div>
+            <p>Led teams, coordinated delivery, and worked with clients on practical web solutions.</p>
             <div class="date">Jun 2021 - May 2024</div>
           </div>
-          <div class="timeline-item">
-            <div>
-              <h3>IEEE Research Publication</h3>
-              <div class="meta">Security and Data Science Research</div>
-              <p>Published research on security issues in social media and data-driven threat analysis.</p>
-            </div>
+          <div class="brutal-card timeline-item">
+            <h3>IEEE Research Publication</h3>
+            <div class="meta">Security and Data Science Research</div>
+            <p>Published research on security issues in social media and data-driven threat analysis.</p>
             <div class="date">Jun 2023</div>
           </div>
         </div>
@@ -994,14 +1010,11 @@
 
     <section id="projects" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Projects</div>
-          <h2 class="section-title">Selected work</h2>
-        </div>
+        <h2 class="section-title">Selected work</h2>
         <p class="section-copy">These projects reflect both application foundations and direct AWS infrastructure work, which is the combination I want to keep building on.</p>
       </div>
       <div class="projects">
-        <article class="project">
+        <article class="brutal-card project">
           <h3>AWS Web App Deployment</h3>
           <div class="project-role">Cloud Infrastructure Project</div>
           <p>Designed and deployed a web application environment on AWS using EC2, RDS, S3, and CloudWatch, then documented the setup on GitHub with an architecture diagram.</p>
@@ -1017,53 +1030,56 @@
             <span class="tag">CloudWatch</span>
             <span class="tag">IAM</span>
           </div>
-          <div class="links"><a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a></div>
+          <div class="links"><a href="./projects/cloud/README.md" target="_blank" rel="noopener noreferrer">Cloud project docs</a></div>
         </article>
-        <article class="project">
+        <article class="brutal-card project">
           <h3>E-Commerce Application</h3>
           <div class="project-role">Full Stack Web Developer</div>
-          <p>Built a database-backed application for product browsing, comparisons, and shopping flow management.</p>
+          <p>Built a runnable catalog, cart, checkout, pricing, inventory, and admin order workflow that mirrors the resume project.</p>
           <ul>
-            <li>Used Python, Django, JavaScript, Bootstrap, and MySQL.</li>
-            <li>Worked on product retrieval, dynamic user flow, and cart-related functionality.</li>
-            <li>Built application understanding that supports future AWS deployment and troubleshooting work.</li>
+            <li>Implemented product retrieval, session creation, cart updates, checkout logic, and inventory validation.</li>
+            <li>Separated API routing, business rules, and browser UI into clear project layers.</li>
+            <li>Added a small automated test for pricing, cart, and order lifecycle behavior.</li>
           </ul>
           <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Django</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">REST APIs</span>
             <span class="tag">JavaScript</span>
-            <span class="tag">Bootstrap</span>
-            <span class="tag">MySQL</span>
+            <span class="tag">Cart</span>
+            <span class="tag">Orders</span>
           </div>
-          <div class="links"><a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a></div>
+          <div class="links">
+            <a href="https://ztm-ecommerce.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a>
+            <a href="https://github.com/TharunMedam/Ecommerce" target="_blank" rel="noopener noreferrer">GitHub repo</a>
+          </div>
         </article>
-        <article class="project">
+        <article class="brutal-card project">
           <h3>E-Survey Application</h3>
           <div class="project-role">Full Stack Web Developer</div>
-          <p>Built a structured survey workflow for collecting forms, reviews, and ratings through backend-connected data capture.</p>
+          <p>Built a structured survey workflow for collecting responses, validating inputs, filtering records, and generating report summaries.</p>
           <ul>
-            <li>Used Spring Boot, Java, JavaScript, Bootstrap, and MySQL.</li>
-            <li>Worked on form handling, application logic, and reliable data collection flows.</li>
-            <li>Strengthened understanding of how services and user workflows interact in deployable systems.</li>
+            <li>Implemented submission validation, filtered response retrieval, and aggregate report generation.</li>
+            <li>Seeded sample survey data and transformed raw records into stakeholder-friendly summaries.</li>
+            <li>Added a focused automated test for validation and reporting logic.</li>
           </ul>
           <div class="tags">
-            <span class="tag">Java</span>
-            <span class="tag">Spring Boot</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Reporting</span>
             <span class="tag">JavaScript</span>
-            <span class="tag">Bootstrap</span>
-            <span class="tag">MySQL</span>
+            <span class="tag">Validation</span>
+            <span class="tag">REST APIs</span>
           </div>
-          <div class="links"><a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub profile</a></div>
+          <div class="links">
+            <a href="https://ztm-esurvey.vercel.app" target="_blank" rel="noopener noreferrer">Live demo</a>
+            <a href="https://github.com/TharunMedam/Esurvey" target="_blank" rel="noopener noreferrer">GitHub repo</a>
+          </div>
         </article>
       </div>
     </section>
 
     <section id="certifications" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Certifications</div>
-          <h2 class="section-title">Credentials</h2>
-        </div>
+        <h2 class="section-title">Credentials</h2>
         <p class="section-copy">These certifications reinforce my cloud readiness and support the direction I am taking in AWS-focused roles.</p>
       </div>
       <div class="certs">
@@ -1183,14 +1199,11 @@
 
     <section id="architecture" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Architecture</div>
-          <h2 class="section-title">How I think about AWS delivery</h2>
-        </div>
+        <h2 class="section-title">How I think about AWS delivery</h2>
         <p class="section-copy">The project above reflects how I think about compute, storage, data, permissions, monitoring, and documentation as parts of one system rather than isolated services.</p>
       </div>
       <div class="architecture">
-        <div class="plain-block">
+        <div class="brutal-card" style="background: var(--accent-pink);">
           <h3>Current deployment path</h3>
           <div class="flow-list">
             <div class="flow-item"><span>Compute</span>EC2 runs the application workload inside a configured security boundary.</div>
@@ -1198,7 +1211,7 @@
             <div class="flow-item"><span>Static + Monitoring</span>S3 stores static files while CloudWatch tracks CPU usage and alarm conditions.</div>
           </div>
         </div>
-        <div class="plain-block">
+        <div class="brutal-card" style="background: var(--accent-green);">
           <h3>Documentation and control</h3>
           <div class="flow-list">
             <div class="flow-item"><span>Access Control</span>IAM role attachment and security group rules define controlled service interaction.</div>
@@ -1211,28 +1224,30 @@
 
     <section id="contact" class="section">
       <div class="section-head">
-        <div>
-          <div class="section-kicker">Contact</div>
-          <h2 class="section-title">Let’s keep it simple</h2>
-        </div>
+        <h2 class="section-title">Let's keep it simple</h2>
         <p class="section-copy">If a team is looking for someone who is serious about AWS, willing to learn quickly, and comfortable working through real deployment details, I would be glad to talk.</p>
       </div>
       <div class="contact">
-        <div class="contact-block">
+        <div class="brutal-card contact-block">
           <h3>Email</h3>
           <strong>medamtn@mail.uc.edu</strong>
         </div>
-        <div class="contact-block">
+        <div class="brutal-card contact-block">
           <h3>Links</h3>
-          <p><a href="https://github.com/tharunmedam" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://linkedin.com/in/tharunmedam" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="./Tharun_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></p>
+          <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+            <a href="https://github.com/tharunmedam" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/tharunmedam" class="btn btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="./Tharun_Resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Resume</a>
+          </div>
         </div>
       </div>
     </section>
 
     <footer>
       <div>&copy; 2026 Tharun Medam | Cloud Engineer</div>
-      <div class="footer-note">A cloud portfolio shaped with a more tactile and realistic visual language</div>
+      <div class="footer-note">A bold neobrutalist portfolio using your updated structure and badge system</div>
     </footer>
   </div>
 </body>
 </html>
+
