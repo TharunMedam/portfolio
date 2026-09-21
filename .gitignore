@@ -1,4 +1,9 @@
 node_modules/
+.npm-cache/
+.vercel-cli/
+.vercel-config/
+.vercel-static-deploy/
+.vercel/
 .env
 .idea/
 *.pem
@@ -7,7 +12,12 @@ node_modules/
 *.tfstate.*
 infra/terraform/terraform.tfvars
 crash.log
+docker-start.log
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+.vercel
+/projects/ecommerce/
+/projects/esurvey/
+
